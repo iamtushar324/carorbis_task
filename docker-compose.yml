@@ -1,0 +1,27 @@
+version: "3.5"
+services:
+  client:
+    build: ./client
+    ports:
+      - 3000:3000
+    environment:
+      - REACT_APP_BASE_SERVER_URL=http://localhost:4563
+  backend:
+    build: ./backend
+    ports:
+      - 4563:4563
+    links:
+      - mongo
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:4.4-bionic
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=test
+      - MONGO_INITDB_ROOT_PASSWORD=test
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
