@@ -35,6 +35,15 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+/*  PASSPORT SETUP  */
+
+const passport = require('passport');
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('./handlers/passport-config')
+
 // Code simulate low network connection speed
 //app.use((req, res, next) => {
 //setTimeout(() => next(), 2000);
@@ -54,6 +63,9 @@ app.use("/", (req, res, next) => {
 app.get("/isServerRunning", (req, res, next) => {
 	res.status(200).send({ Run: true });
 });
+app.get("/login",(req,res)=>{
+	res.send("login page")
+})
 app.use("/api", routes.route);
 
 if (config.mode !== "dev") {

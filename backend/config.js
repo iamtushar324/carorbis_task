@@ -13,6 +13,7 @@ const dev = {
 	timeZone: "Asia/Calcutta",
 	logReqBody: true,
 	logReqParams: true,
+	superAdminUsernames: ['iamtushar324@gmail.com']
 };
 const pro = {
 	mode: "pro",
@@ -33,8 +34,8 @@ const pro = {
 };
 
 const config = {
-	dev: { ...dev },
-	pro: { ...pro },
+	'dev': { ...dev },
+	'pro': { ...pro },
 };
 
 module.exports.config = config[ENV];
