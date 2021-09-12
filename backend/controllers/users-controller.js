@@ -1,4 +1,4 @@
-const Users = require("../models/userModel")
+const Users = require("../models/usersModel")
 const {config} = require('../config')
 
 async function registerUser(req , res ){

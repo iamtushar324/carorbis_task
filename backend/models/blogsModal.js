@@ -1,11 +1,12 @@
 const mongoose = require('mongoose')
+const passportLocalMongoose = require('passport-local-mongoose');
 const Schema = mongoose.Schema;
 
 const blogSchema = new mongoose.Schema({
-    userId: { type: String, trim: true },
+    userId: { type: Schema.Types.ObjectId, index: true, required: true, ref: "User" },
     mainContent: { type: String, trim: true },
-    subAdminVerified: {type: bool , default:false},
-    adminVerified: {type: bool , default:false},
+    subAdminVerified: {type: Boolean , default:false},
+    adminVerified: {type: Boolean , default:false},
     title: {type:String},
     createdAt: { type: Date, default: Date.now }
 })
