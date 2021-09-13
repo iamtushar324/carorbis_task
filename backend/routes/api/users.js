@@ -4,10 +4,10 @@ const passport = require("passport");
 const {isLoggedIn} = require('../../middlewares/auth')
 
 route.post("/register",registerUser);
-route.post("/login", passport.authenticate("local",{
-    successRedirect: "/feed",
-    failureRedirect: "/login"
-}), function(req, res){
+route.post("/login", passport.authenticate("local"), function(req, res){
+    if(req.user){
+        res.send({success:true , data:null})
+    }
     
 });
 
