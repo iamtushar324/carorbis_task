@@ -1,5 +1,5 @@
 const route = require("express").Router();
-const {registerUser, makeAdmin, makeSubAdmin} = require("../../controllers/users-controller")
+const {registerUser,updateUserRole} = require("../../controllers/users-controller")
 const passport = require("passport");
 const {isLoggedIn} = require('../../middlewares/auth')
 
@@ -20,7 +20,6 @@ route.get("/isLoggedIn" , isLoggedIn , (req,res)=>{
 	res.send(true);
 })
 
-route.post("/makeAdmin",isLoggedIn ,makeAdmin)
-route.post("/makeSubAdmin",isLoggedIn ,makeSubAdmin)
+route.post("/updateUserRole",isLoggedIn ,updateUserRole)
 
 module.exports = {route}

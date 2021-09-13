@@ -18,7 +18,7 @@ async function registerUser(req , res ){
 }
 }
 
-async function makeAdmin(req,res){
+async function updateUserRole(req,res){
     try{
     let isUsernameSuperAdmin = false;
     config.superAdminUsernames.map((username)=>{
@@ -28,43 +28,16 @@ async function makeAdmin(req,res){
     })
 
     if(isUsernameSuperAdmin){
-       await Users.findOneAndUpdate({username:req.body.username} , { role: 'admin' });
-       res.send({success:true,data:{msg:req.body.username + " is now admin"}});
+        if(req.body.role !== 'admin' && req.body.role !== 'subAdmin' && req.body.role !== 'member') throw new Error("Invalid Role");
+       await Users.findOneAndUpdate({username:req.body.username} , { role: req.body.role });
+       res.send({success:true,data:{msg:req.body.username + " is now " + req.body.role}});
     }else{
         res.send({success:false , data:{msg:"you are not authorized"}})
     }
 }catch(err){
     console.log(err)
-    res.send({success:false , data:{msg:"Internal Error"}})
+    res.send({success:false , data:{msg:err.message}})
 }
-    
-
 }
 
-
-async function makeSubAdmin(req,res){
-   
-    try{
-    let isUsernameSuperAdmin = false;
-    superAdminUsernames.map((username)=>{
-        if(username == req.user.username){
-            isUsernameSuperAdmin = true;
-        }
-    })
-
-    if(isUsernameSuperAdmin){
-       let newUser =  Users.find({username:req.body.username});
-       newUser.role = 'admin'
-       newUser.save();
-       res.send({success:true,data:{msg:req.body.username + " is now admin"}});
-    }else{
-        res.send({success:false , data:{msg:"you are not authorized"}})
-    }
-    }catch(err){
-    console.log(err)
-    res.send({success:false , data:{msg:"Internal Error"}})
-    }
-
-}
-
-module.exports = {registerUser , makeAdmin, makeSubAdmin}
+module.exports = {registerUser , updateUserRole}

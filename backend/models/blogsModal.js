@@ -3,7 +3,7 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const Schema = mongoose.Schema;
 
 const blogSchema = new mongoose.Schema({
-    userId: { type: Schema.Types.ObjectId, index: true, required: true, ref: "User" },
+    userId: { type: Schema.Types.ObjectId, index: true, required: true, ref: "Users" },
     mainContent: { type: String, trim: true },
     subAdminVerified: {type: Boolean , default:false},
     adminVerified: {type: Boolean , default:false},
