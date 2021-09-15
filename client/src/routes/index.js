@@ -6,8 +6,7 @@ import {
 } from "react-router-dom";
 import AdminPanel from 'pages/AdminPanel'
 import Feeds from 'pages/Feeds'
-import Register from 'pages/Register'
-import Login from 'pages/Login'
+import Login from 'pages/LoginRegister'
 
 export default function Routes() {
 
@@ -20,9 +19,6 @@ export default function Routes() {
 	  </Route>
           <Route path="/login">
             <Login />
-          </Route>
-          <Route path="/login">
-            <Register />
           </Route>
           <Route path="/admin">
             <AdminPanel />

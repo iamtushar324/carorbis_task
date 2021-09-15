@@ -2,39 +2,27 @@ import React , {useState} from 'react'
 import styled from 'styled-components'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import {axios} from 'helpers'
+import axios from 'axios'
 import { useHistory } from 'react-router-dom';
 
 export default function LoginBox(props){
 	const history = useHistory()
 
 	const [data, setData] = useState({})
+
 	const handleLogin = ()=>{
-		// axios.post('/users/login' , {...data}).then((res)=>{
+		// axios.post('/api/users/login' , {...data}).then((res)=>{
+		// 	console.log(res);
 		// 	if(res.data.success){
 		// 		history.push('/feeds');
 		// 	}else if(!res.success){
 		// 		alert("Unable to Login , Please Try Again Later")
 		// 	}
 		// }).catch((err)=>{
-		// 	alert(err.message)
+		// 	console.log(err)
 		// })
-
-		let dataR = {...data}
-		fetch(process.env.REACT_APP_BASE_URL + '/api/users/login' , {
-			 method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    mode: 'cors', // no-cors, *cors, same-origin
-    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: 'same-origin', // include, *same-origin, omit
-    headers: {
-      'Content-Type': 'application/json'
-      // 'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    redirect: 'follow', // manual, *follow, error
-    referrerPolicy: 'no-referrer',
-			body:JSON.stringify(dataR)
-		}).then((res)=>res.json()).then((res)=>{console.log(res)})
 	}
+
 	return (
 		<MainWrapper>
 			<Heading>Login</Heading>
@@ -55,15 +43,18 @@ export default function LoginBox(props){
 }
 
 const MainWrapper = styled.div`
-text-align:center
+text-align:center;
 `
+
 const Text = styled(TextField)`
 width: 70%;
 `
+
 const Heading = styled.h2`
 	text-align: center;
 	margin:2rem;
 `
+
 const BtnContainer = styled.div`
 display:flex;
 flex-direction:row;

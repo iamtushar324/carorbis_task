@@ -2,12 +2,25 @@ import React , {useState} from 'react'
 import styled from 'styled-components'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 export default function RegisterBox(props){
 	const [data , setData] = useState({})
+	const history = useHistory
 
 	const handleRegister = (e)=>{
-		console.log(data)
+		// console.log(data)
+		// axios.post('/api/users/register' , {...data}).then((res)=>{
+		// 	console.log(res);
+		// 	if(res.data.success){
+		// 		history.push('/feeds');
+		// 	}else if(!res.success){
+		// 		alert("Unable to Login , Please Try Again Later")
+		// 	}
+		// }).catch((err)=>{
+		// 	console.log(err)
+		// })
 	}
 
 

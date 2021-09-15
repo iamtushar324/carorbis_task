@@ -4,7 +4,7 @@ import { baseColors } from 'styles/baseStyles'
 import LoginBox from 'containers/LoginBox'
 import RegisterBox from 'containers/RegisterBox'
 
-export default function Login(){
+export default function LoginRegister(){
 	const [isLogin , setIsLogin] = useState(true)
 
 	return <MainWrapper>

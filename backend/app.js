@@ -4,6 +4,7 @@ const routes = require("./routes/api");
 const express = require("express");
 const app = express();
 const session = require("express-session");
+const path = require("path");
 
 if (!process.env.APP_ENV) {
 	console.error("Please Provide .env file at root the folder");
@@ -40,6 +41,9 @@ const passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(express.static(path.join(__dirname, "build")));
+
+
 require('./handlers/passport-config')
 
 // Code simulate low network connection speed
@@ -61,10 +65,11 @@ app.use("/", (req, res, next) => {
 app.get("/isServerRunning", (req, res, next) => {
 	res.status(200).send({ Run: true });
 });
-app.get("/login",(req,res)=>{
-	res.send("login page")
-})
 app.use("/api", routes.route);
+
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 if (config.mode !== "dev") {
 	process.on("uncaughtException", (err) => {

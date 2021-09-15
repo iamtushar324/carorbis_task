@@ -19,20 +19,18 @@ export default function Feeds(){
 		// }).catch((err)=>{
 		// 	alert("Internal Error , Try Agin Later")
 		// })
-		fetch(process.env.REACT_APP_BASE_URL + '/api/users/isLoggedIn' , {
-			method: 'GET', // *GET, POST, PUT, DELETE, etc.
-			mode: 'cors', // no-cors, *cors, same-origin
-			cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-			credentials: 'include', // include, *same-origin, omit
-			headers: {
-			'Content-Type': 'application/json'
-			// 'Content-Type': 'application/x-www-form-urlencoded',
-			},
-			redirect: 'follow', // manual, *follow, error
-			referrerPolicy: 'no-referrer',
-		}).then((res)=>res.json()).then((res)=>{console.log(res)})
 
 	},[history])
+	const [blogs,setBlogs] = useState([])
+	useEffect(()=>{
+		// axios.get('/api/blogs/' ).then((res)=>{
+		// 	if(res.data.success){
+		// 		let blogsData = res.data.data.blogs;
+		// 		setBlogs(blogsData)
+
+		// 	}
+		// })
+	},[])
 
 	const handleOpenCreateBlogModal = ()=>{
 		setOpenCreateBlog(true)
@@ -50,6 +48,9 @@ export default function Feeds(){
 			<BlogBox />
 			<BlogBox />
 			<BlogBox />
+			{/* {blogs?.map((blog)=>{
+				return <BlogBox content={blog.mainContent} title={blog.title} />
+			})} */}
 		</BlogsContainer>
 		<CreateBlog open={openCreateBlog} setOpen={setOpenCreateBlog}/>
 		<BtnContainerSignOut><Button>Sign Out</Button></BtnContainerSignOut>
@@ -71,7 +72,7 @@ const BlogsContainer = styled.div`
 width:100%;
 `
 const BtnContainerSignOut = styled.div`
-	position:absolute;
+	position:fixed;
 	bottom:25px;
 	right:50px;
 `
