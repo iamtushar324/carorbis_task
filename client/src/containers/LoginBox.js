@@ -10,11 +10,30 @@ export default function LoginBox(props){
 
 	const [data, setData] = useState({})
 	const handleLogin = ()=>{
-		axios.post('/users/login' , {...data}).then((res)=>{
-			if(res.data.success){
-				history.push('/feeds')
-			}
-		})
+		// axios.post('/users/login' , {...data}).then((res)=>{
+		// 	if(res.data.success){
+		// 		history.push('/feeds');
+		// 	}else if(!res.success){
+		// 		alert("Unable to Login , Please Try Again Later")
+		// 	}
+		// }).catch((err)=>{
+		// 	alert(err.message)
+		// })
+
+		let dataR = {...data}
+		fetch(process.env.REACT_APP_BASE_URL + '/api/users/login' , {
+			 method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer',
+			body:JSON.stringify(dataR)
+		}).then((res)=>res.json()).then((res)=>{console.log(res)})
 	}
 	return (
 		<MainWrapper>

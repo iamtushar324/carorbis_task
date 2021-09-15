@@ -5,7 +5,7 @@ const MONGO_HOST = process.env.MONGO_HOST;
 
 const dev = {
 	mode: "dev",
-	clients: ["http://localhost:3000", "http://macbook.local:3000",],
+	clients: ["http://localhost:3000"],
 	app: {
 		port: 4563,
 	},

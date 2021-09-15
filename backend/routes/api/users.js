@@ -7,8 +7,9 @@ route.post("/register",registerUser);
 route.post("/login", passport.authenticate("local"), function(req, res){
     if(req.user){
         res.send({success:true , data:null})
+    }else{
+        res.send({success:false , data:null})
     }
-    
 });
 
 route.get("/logout", function(req, res){

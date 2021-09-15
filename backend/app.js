@@ -18,22 +18,20 @@ var corsOptions = {
       callback(new Error('Not allowed by CORS'))
     }
   },
-  credentials:false
 }
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use(cors(corsOptions));
+app.use(cors({corsOptions}));
 //For express sessions
 app.use(
 	session({
 		secret: process.env.SESSION_SECRET,
 		resave: false,
 		saveUninitialized: true,
-		cookie: { httpOnly: false },
 	})
 );
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 /*  PASSPORT SETUP  */
 

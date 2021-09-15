@@ -47,5 +47,4 @@ async function getUnVerifiedBlogs(req, res){
 	}
 }
 
-
 module.exports = {createBlog , getAllBlogs, getUnVerifiedBlogs }
